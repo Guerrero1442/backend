@@ -3,6 +3,7 @@ package com.proyecto.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.backend.model.Conductor;
 import com.proyecto.backend.repository.ConductorRepository;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
 public class ConductorController {
@@ -23,36 +24,36 @@ public class ConductorController {
 	private ConductorRepository conductorRepository;
 
 	//? Ver todos los autores
-	@GetMapping("/Conductor")
+	@GetMapping("/drivers")
 	public List<Conductor> getConductors() {
 		return conductorRepository.findAll();
 	}
 
 	//? Ver autor por ID
-	@GetMapping("/Conductor/{ConductorId}")
-	public Conductor getConductor(@PathVariable int ConductorId){
-		Conductor c = conductorRepository.findById(ConductorId).get();
+	@GetMapping("/drivers/{driverId}")
+	public Conductor getConductor(@PathVariable int driverId){
+		Conductor c = conductorRepository.findById(driverId).get();
 		return c;
 	}
 
 	//? Publicar autor
-	@PostMapping("/Conductor")
+	@PostMapping("/drivers")
 	public Conductor saveConductor(@RequestBody Conductor Conductor){
 		conductorRepository.save(Conductor);
 		return Conductor;
 	}
 
 	//? Publicar varios autores
-	@PostMapping("/Conductors")
-	public List<Conductor> saveConductors(@RequestBody List<Conductor> ConductorsList){
-		conductorRepository.saveAll(ConductorsList);
-		return ConductorsList;
-	}
+	// @PostMapping("/Conductor")
+	// public List<Conductor> saveConductors(@RequestBody List<Conductor> ConductorsList){
+	// 	conductorRepository.saveAll(ConductorsList);
+	// 	return ConductorsList;
+	// }
 
 	//? Actualizar autores
-	@PutMapping("/Conductor/{ConductorId}")
-	public Conductor putConductor(@PathVariable int ConductorId, @RequestBody Conductor Conductor){
-		Conductor c = conductorRepository.findById(ConductorId).get();
+	@PutMapping("/drivers/{driverId}")
+	public Conductor putConductor(@PathVariable int driverId, @RequestBody Conductor Conductor){
+		Conductor c = conductorRepository.findById(driverId).get();
 
 		c.setNombre(Conductor.getNombre());
 		c.setFecha_ingreso(Conductor.getFecha_ingreso());
@@ -62,15 +63,15 @@ public class ConductorController {
 	}
 
 	//? Borrar autor
-	@DeleteMapping("/Conductor/{ConductorId}")
-	public Conductor deleteConductor(@PathVariable int ConductorId){
-		Conductor c = conductorRepository.findById(ConductorId).get();
-		conductorRepository.deleteById(ConductorId);
+	@DeleteMapping("/drivers/{driverId}")
+	public Conductor deleteConductor(@PathVariable int driverId){
+		Conductor c = conductorRepository.findById(driverId).get();
+		conductorRepository.deleteById(driverId);
 
 		return c;
 	}
 
-	@DeleteMapping("/Conductor")
+	@DeleteMapping("/drivers")
 	public void deleteAll(){
 		conductorRepository.deleteAll();
 	}

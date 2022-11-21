@@ -1,8 +1,8 @@
 package com.proyecto.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,12 +14,11 @@ public class Ruta {
 	// n ́umero del bus, la fecha y hora para salir el bus en
 	// plataforma, la cantidad de sillas vac ́ıas y Nombre conductor
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private int numero_bus;
 
-	private String fecha_hora;
+	private Date fecha_hora;
 
 	private int cantidad_sillas;
 
@@ -31,7 +30,7 @@ public class Ruta {
 
 	}
 
-	public Ruta(int id, int numero_bus, String fecha_hora, int cantidad_sillas, Conductor conductor) {
+	public Ruta(int id, int numero_bus, Date fecha_hora, int cantidad_sillas, Conductor conductor) {
 		this.id = id;
 		this.numero_bus = numero_bus;
 		this.fecha_hora = fecha_hora;
@@ -55,11 +54,11 @@ public class Ruta {
 		this.numero_bus = numero_bus;
 	}
 
-	public String getFecha_hora() {
+	public Date getFecha_hora() {
 		return fecha_hora;
 	}
 
-	public void setFecha_hora(String fecha_hora) {
+	public void setFecha_hora(Date fecha_hora) {
 		this.fecha_hora = fecha_hora;
 	}
 

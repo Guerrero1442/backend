@@ -3,6 +3,7 @@ package com.proyecto.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proyecto.backend.model.Ruta;
 import com.proyecto.backend.repository.RutaRepository;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
 public class RutaController {
@@ -23,36 +25,36 @@ public class RutaController {
 	private RutaRepository rutaRepository;
 
 	//? Ver todos los autores
-	@GetMapping("/Ruta")
+	@GetMapping("/routes")
 	public List<Ruta> getRutas() {
 		return rutaRepository.findAll();
 	}
 
 	//? Ver autor por ID
-	@GetMapping("/Ruta/{RutaId}")
-	public Ruta getRuta(@PathVariable int RutaId){
-		Ruta r = rutaRepository.findById(RutaId).get();
+	@GetMapping("/routes/{routeId}")
+	public Ruta getRuta(@PathVariable int routeId){
+		Ruta r = rutaRepository.findById(routeId).get();
 		return r;
 	}
 
 	//? Publicar autor
-	@PostMapping("/Ruta")
+	@PostMapping("/routes")
 	public Ruta saveRuta(@RequestBody Ruta Ruta){
 		rutaRepository.save(Ruta);
 		return Ruta;
 	}
 
 	//? Publicar varios autores
-	@PostMapping("/Rutas")
-	public List<Ruta> saveRutas(@RequestBody List<Ruta> RutasList){
-		rutaRepository.saveAll(RutasList);
-		return RutasList;
-	}
+	// @PostMapping("/Rutas")
+	// public List<Ruta> saveRutas(@RequestBody List<Ruta> RutasList){
+	// 	rutaRepository.saveAll(RutasList);
+	// 	return RutasList;
+	// }
 
 	//? Actualizar autores
-	@PutMapping("/Ruta/{RutaId}")
-	public Ruta putRuta(@PathVariable int RutaId, @RequestBody Ruta ruta){
-		Ruta r = rutaRepository.findById(RutaId).get();
+	@PutMapping("/routes/{routeId}")
+	public Ruta putRuta(@PathVariable int routeId, @RequestBody Ruta ruta){
+		Ruta r = rutaRepository.findById(routeId).get();
 
 		r.setConductor(ruta.getConductor());
 		r.setNumero_bus(ruta.getNumero_bus());
@@ -64,15 +66,15 @@ public class RutaController {
 	}
 
 	//? Borrar autor
-	@DeleteMapping("/Ruta/{RutaId}")
-	public Ruta deleteRuta(@PathVariable int RutaId){
-		Ruta r = rutaRepository.findById(RutaId).get();
-		rutaRepository.deleteById(RutaId);
+	@DeleteMapping("/routes/{routeId}")
+	public Ruta deleteRuta(@PathVariable int routeId){
+		Ruta r = rutaRepository.findById(routeId).get();
+		rutaRepository.deleteById(routeId);
 
 		return r;
 	}
 
-	@DeleteMapping("/Ruta")
+	@DeleteMapping("/routes")
 	public void deleteAll(){
 		rutaRepository.deleteAll();
 	}

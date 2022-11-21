@@ -1,5 +1,6 @@
 package com.proyecto.backend.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,7 @@ public class Conductor {
 
 	private String nombre;
 
-	private String fecha_ingreso;
+	private Date fecha_ingreso;
 
 	@OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -29,7 +30,7 @@ public class Conductor {
 
 	}
 
-	public Conductor(int id, String nombre, String fecha_ingreso, Set<Ruta> ruta) {
+	public Conductor(int id, String nombre, Date fecha_ingreso, Set<Ruta> ruta) {
 		this.id = id;
 		this.nombre = nombre;
 		this.fecha_ingreso = fecha_ingreso;
@@ -52,11 +53,11 @@ public class Conductor {
 		this.nombre = nombre;
 	}
 
-	public String getFecha_ingreso() {
+	public Date getFecha_ingreso() {
 		return fecha_ingreso;
 	}
 
-	public void setFecha_ingreso(String fecha_ingreso) {
+	public void setFecha_ingreso(Date fecha_ingreso) {
 		this.fecha_ingreso = fecha_ingreso;
 	}
 
